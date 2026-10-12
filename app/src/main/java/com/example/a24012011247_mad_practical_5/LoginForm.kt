@@ -25,19 +25,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.a24012011247_mad_practical_5.ui.theme.Pink40
+import com.example.a24012011247_mad_practical_5.ui.theme._24012011247_MAD_Practical5Theme
 
 @Composable
-fun LoginActivityUI() {
+fun LoginActivityUI(showMsg: ((String) -> Unit)? = null) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 28.dp)
+            .padding(horizontal = 20.dp)
     ) {
         Spacer(modifier = Modifier.height(20.dp))
         Image(
@@ -57,10 +59,15 @@ fun LoginActivityUI() {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(15.dp)
+                    .padding(all = 20.dp)
             ) {
-                FormField(lable = "Email", textState = email, onTextChange = { email = it })
-                FormField(lable = "Password", textState = password, onTextChange = { password = it }, isPassword = true)
+                FormField(label = "Email", textState = email, onTextChange = { email = it })
+                FormField(
+                    label = "Password",
+                    textState = password,
+                    onTextChange = { password = it },
+                    isPasswordField = true
+                )
                 Text(
                     text = "Forgot Password?",
                     fontSize = 18.sp,
@@ -69,7 +76,11 @@ fun LoginActivityUI() {
                         .align(Alignment.End)
                 )
                 Button(
-                    onClick = { },
+                    onClick = {
+                        if (showMsg != null) {
+                            showMsg("Login Successful")
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.CenterHorizontally)
@@ -84,10 +95,23 @@ fun LoginActivityUI() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text("Don't have an account?", fontSize = 16.sp)
-            Spacer(Modifier.width(5.dp))
+            Spacer(modifier = Modifier.width(5.dp))
             TextButton(onClick = { }) {
-                Text("SIGN UP", color = Pink40, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    text = "SIGN UP",
+                    color = Pink40,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginActivityUIPreview() {
+    _24012011247_MAD_Practical5Theme {
+        LoginActivityUI()
     }
 }
