@@ -18,18 +18,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.a24012011247_mad_practical_5.ui.theme._24012011247_MAD_Practical5Theme
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             _24012011247_MAD_Practical5Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                //Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                AppNavigation((this))
+                //}
             }
         }
     }
@@ -53,16 +51,16 @@ fun GreetingPreview() {
 
 @Composable
 @Preview
-fun ButtonDemo() {
+fun ButtonDemo(){
     var counter by remember { mutableStateOf(1) }
-
     Button(
         onClick = {
-            counter += 1
+            counter+=1
         }
-    ) {
+    ){
         Text(
-            text = counter.toString()
+            text = counter.toString(),
         )
+
     }
 }
